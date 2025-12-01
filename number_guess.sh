@@ -53,3 +53,12 @@ do
     echo "It's higher than that, guess again:"
   fi
 done
+
+# Update user stats
+GAMES_PLAYED=$(( GAMES_PLAYED + 1 ))
+if [[ $BEST_GAME -eq 0 || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]
+then
+  BEST_GAME=$NUMBER_OF_GUESSES
+fi
+
+UPDATE_USER=$($PSQL "UPDATE users SET games_played=$GAMES_PLAYED, best_game=$BEST_GAME WHERE user_id=$USER_ID")
