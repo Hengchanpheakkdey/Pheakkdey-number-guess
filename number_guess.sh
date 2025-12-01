@@ -34,6 +34,13 @@ do
   read GUESS
   NUMBER_OF_GUESSES=$(( NUMBER_OF_GUESSES + 1 ))
   
+  # Check if input is an integer
+  if [[ ! $GUESS =~ ^[0-9]+$ ]]
+  then
+    echo "That is not an integer, guess again:"
+    continue
+  fi
+  
   # Check if guess is correct
   if [[ $GUESS -eq $SECRET_NUMBER ]]
   then
